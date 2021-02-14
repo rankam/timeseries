@@ -4,6 +4,7 @@
 - Provide REST API that accepts JSON in the following format
 
 ### JSON Model
+```
 timestamps = [
     {
         timestamp: value,
@@ -14,6 +15,7 @@ timestamps = [
         y: value,
     }
 ]
+```
 
 ## Frontend
 - Allows user to upload CSV with the folowing columns: timestamp, y
