@@ -1,10 +1,11 @@
-# /predict
-from flask import Flask, render_template, request, jsonify
-import requests
-import numpy as np
-import traceback
-import pickle
 import pandas as pd
+import plotly
+from fbprophet import Prophet
+import os
+import matplotlib.pyplot as plt
+import json
+from pandas.io.json import json_normalize
+
 
 # Function to fit a Prophet model on input JSON
 def prophet_forecast(input_json, forecast_periods = 10):
@@ -25,22 +26,3 @@ def prophet_forecast(input_json, forecast_periods = 10):
     forecast_json = forecast.to_json(orient = 'records', lines = True).splitlines()
     
     return forecast_json
-
-
-app = Flask(__name__)
-
-@app.route('/predict', methods = ["POST"])
-def predict():
-
-
-
-
-    return jsonify({"response": "hello world"})
-
-
-
-
-
-
-if __name__ == '__main__':
-    app.run()
