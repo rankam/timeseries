@@ -1,6 +1,5 @@
 # /predict
 from flask import Flask, render_template, request, jsonify
-import requests
 import numpy as np
 import traceback
 import pickle
@@ -32,13 +31,10 @@ app = Flask(__name__)
 @app.route('/predict', methods = ["POST"])
 def predict():
 
-
-
-
-    return jsonify({"response": "hello world"})
-
-
-
+    data = request.json
+    forecast = prophet_forecast(input_json = data, forecast_periods=10)
+    
+    return jsonify({"output": str(forecast), "message": "forecast successful"})
 
 
 
