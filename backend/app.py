@@ -4,11 +4,16 @@ import numpy as np
 import traceback
 import pickle
 import pandas as pd
+import ast
 
 # Function to fit a Prophet model on input JSON
 def prophet_forecast(input_json, forecast_periods = 10):
+    
+    # Convert string of list to list
+    input_json_lst = ast.literal_eval(input_json) 
+
     # Format JSON data to a pandas dataframe
-    data_json_unpacked = [json.loads(i) for i in input_json]
+    data_json_unpacked = [json.loads(i) for i in input_json_lst]
     data_df = pd.json_normalize(data_json_unpacked)
     data_df.columns = ['ds', 'y']
 
@@ -24,7 +29,6 @@ def prophet_forecast(input_json, forecast_periods = 10):
     forecast_json = forecast.to_json(orient = 'records', lines = True).splitlines()
     
     return forecast_json
-
 
 app = Flask(__name__)
 
